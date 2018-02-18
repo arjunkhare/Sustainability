@@ -10,10 +10,6 @@ import {
 import { Camera, Permissions } from 'expo';
 import { ImagePicker } from 'expo';
 import { Image, ImageBackground } from 'react-native';
-import React, {Component} from 'react';
-componentDidMount(){
-  
-}
 export default class CameraExample extends React.Component {
   componentDidMount() {
     Font.loadAsync({
@@ -106,7 +102,9 @@ export default class CameraExample extends React.Component {
                   }}>
                   {' '}Take Picture{' '}
                 </Text>
+
               </TouchableOpacity>
+
             </View>
           </Camera>
           {this.renderImage()}
