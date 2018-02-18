@@ -9,8 +9,10 @@ import {
 } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import { ImagePicker } from 'expo';
-import { Image, ImageBackground } from 'react-native';
+import { Image, ImageBackground, Button } from 'react-native';
+
 export default class CameraExample extends React.Component {
+
   componentDidMount() {
     Font.loadAsync({
       'Bungee-Regular': require('./assets/Bungee-Regular.ttf'),
@@ -25,6 +27,7 @@ export default class CameraExample extends React.Component {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
   }
+  
   get footer() {
     return (
       <View
@@ -35,10 +38,10 @@ export default class CameraExample extends React.Component {
           right: 0,
           backgroundColor: 'rgba(0,0,0,0.5)',
           flexDirection: 'row',
-        }}
-      />
+        }}/>
     );
   }
+  
   render() {
     let { image } = this.state;
     const { hasCameraPermission } = this.state;
@@ -53,37 +56,13 @@ export default class CameraExample extends React.Component {
             style={{ flex: 1 }}
             ref={ref => (this.camera = ref)}
             type={this.state.type}>
-            <View
+            
+            <View     
               style={{
                 flex: 1,
                 backgroundColor: 'transparent',
                 flexDirection: 'row',
               }}>
-              <TouchableOpacity
-                style={{
-                  flex: 0.1,
-                  alignSelf: 'flex-end',
-                  alignItems: 'center',
-                }}
-                onPress={() => {
-                  console.log('fff');
-                  this.setState({
-                    type: this.state.type === Camera.Constants.Type.back
-                      ? Camera.Constants.Type.front
-                      : Camera.Constants.Type.back,
-                  });
-                }}>
-                <Text
-                  style={{
-                    fontSize: 18,
-                    marginBottom: 600,
-                    marginLeft: 550,
-                    color: 'white',
-                    fontFamily: 'Bungee-Regular',
-                  }}>
-                  {' '}Flip Camera{' '}
-                </Text>
-              </TouchableOpacity>
 
               <TouchableOpacity
                 style={{
@@ -102,7 +81,6 @@ export default class CameraExample extends React.Component {
                   }}>
                   {' '}Take Picture{' '}
                 </Text>
-
               </TouchableOpacity>
 
             </View>
@@ -121,66 +99,72 @@ export default class CameraExample extends React.Component {
           style={{
             resizeMode: 'contain',
             ...StyleSheet.absoluteFillObject,
-            backgroundColor: 'orange',
+            backgroundColor: 'white',
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Text
+          <TouchableOpacity
             style={{
-              textAlign: 'center',
-              color: 'white',
-              position: 'absolute',
-              left: 50,
-              bottom: 100,
-              fontSize: 18,
-              fontFamily: 'Bungee-Regular',
-            }}>
-            Recycle
-          </Text>
-          onPress={this._pickImage}>
-          <Text
+              flex: 0.1,
+              alignItems: 'center',
+            }}
+            onPress={console.log("nanas")}>
+            <Text
+              style={{
+                textAlign: 'center',
+                color: 'white',
+                position: 'absolute',
+                bottom: 100,
+                fontSize: 18,
+                fontFamily: 'Bungee-Regular',
+              }}>
+              {' '}Recycle{' '}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             style={{
-              textAlign: 'center',
-              color: 'white',
-              position: 'absolute',
-              left: 165,
-              bottom: 100,
-              fontSize: 18,
-              fontFamily: 'Bungee-Regular',
-            }}>
-            Compost
-          </Text>
-          <Text
+              flex: 0.1,
+              alignItems: 'center',
+            }}
+            onPress={console.log("nanas")}>
+            <Text
+              style={{
+                textAlign: 'center',
+                color: 'white',
+                position: 'absolute',
+                bottom: 100,
+                fontSize: 18,
+                fontFamily: 'Bungee-Regular',
+              }}>
+              {' '}Trash{' '}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             style={{
-              textAlign: 'center',
-              color: 'white',
-              position: 'absolute',
-              left: 300,
-              bottom: 100,
-              fontSize: 18,
-              fontFamily: 'Bungee-Regular',
-            }}>
-            Trash
-          </Text>
+              flex: 0.1,
+              alignItems: 'center',
+            }}
+            onPress={console.log("nanas")}>
+            <Text
+              style={{
+                textAlign: 'center',
+                color: 'white',
+                position: 'absolute',
+                bottom: 100,
+                fontSize: 18,
+                fontFamily: 'Bungee-Regular',
+              }}>
+              {' '}Compost{' '}
+            </Text>
+          </TouchableOpacity>
         </ImageBackground>
       );
     }
   };
   _pickImage = async () => {
     const { base64: data, width, height } = await this.camera.takePictureAsync({
-      quality: 1,
       base64: true,
-      exif: false,
     });
-    //                   await CameraRoll.saveToCameraRoll(picture);
-    // let result = await ImagePicker.launchImageLibraryAsync({
-    //   allowsEditing: true,
-    //   aspect: [4, 3],
-    // });
-
-    // console.log(result);
-    // if (!result.cancelled) {
     this.setState({ width, height, image: 'data:image/jpg;base64,' + data });
-    // }
   };
 }
