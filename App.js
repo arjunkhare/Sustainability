@@ -45,19 +45,7 @@ export default class CameraExample extends React.Component {
   }
 
   render() {
-    <ImageBackground
-      source={'.assets/title.png'}
-      style={{
-        ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', position: 'absolute', bottom: 0, left: 0, right: 0, paddingVertical: 34}}>
-          <CustomButton onPress={this.renderTakeImage()}>Click Anywhere To Continue</CustomButton>
-      </View>
-  }
-      renderTakeImage = () => {
+    let { image } = this.state;
     const { hasCameraPermission } = this.state;
     if (this.state.loading || hasCameraPermission === null) {
       return <View />;
@@ -71,7 +59,7 @@ export default class CameraExample extends React.Component {
             ref={ref => (this.camera = ref)}
             type={this.state.type}>
 
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', position: 'absolute', bottom: 0, left: 0, right: 0, paddingVertical: 34}}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', position: 'absolute', bottom: 0, left: 0, right: 0, paddingVertical: 24}}>
                 <CustomButton onPress={this._pickImage}>Take Picture</CustomButton>
             </View>
           </Camera>
@@ -92,7 +80,7 @@ export default class CameraExample extends React.Component {
             justifyContent: 'center',
           }}>
 
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', position: 'absolute', bottom: 0, left: 0, right: 0, paddingVertical: 34}}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', position: 'absolute', bottom: 0, left: 0, right: 0, paddingVertical: 24}}>
 
 <CustomButton onPress={() => {   }}>Recycle</CustomButton>
 <CustomButton onPress={() => {   }}>Trash</CustomButton>
@@ -164,6 +152,7 @@ export default class CameraExample extends React.Component {
 </TouchableOpacity>
 */
 
+
 const CustomButton = ({onPress, style, children}) => (
   <TouchableOpacity
     style={[{
@@ -174,7 +163,7 @@ const CustomButton = ({onPress, style, children}) => (
     style={{
       textAlign: 'center',
       color: 'white',
-      fontSize: 22,
+      fontSize: 18,
       fontFamily: 'Bungee-Regular',
       margin: 6
     }}>
