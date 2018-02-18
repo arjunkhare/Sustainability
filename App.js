@@ -38,8 +38,9 @@ export default class CameraExample extends React.Component {
           left: 0,
           right: 0,
           backgroundColor: 'rgba(0,0,0,0.5)',
-          flexDirection: 'row'
-        }}/>
+          flexDirection: 'row',
+        }}
+      />
     );
   }
   render() {
@@ -65,6 +66,32 @@ export default class CameraExample extends React.Component {
               <TouchableOpacity
                 style={{
                   flex: 0.1,
+                  alignSelf: 'flex-end',
+                  alignItems: 'center',
+                }}
+                onPress={() => {
+                  console.log('fff');
+                  this.setState({
+                    type: this.state.type === Camera.Constants.Type.back
+                      ? Camera.Constants.Type.front
+                      : Camera.Constants.Type.back,
+                  });
+                }}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    marginBottom: 600,
+                    marginLeft: 550,
+                    color: 'white',
+                    fontFamily: 'Bungee-Regular',
+                  }}>
+                  {' '}Flip Camera{' '}
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={{
+                  flex: 0.1,
                   alignItems: 'right',
                 }}
                 onPress={this._pickImage}>
@@ -87,6 +114,7 @@ export default class CameraExample extends React.Component {
       );
     }
   }
+
   renderImage = () => {
     if (this.state.image != null) {
       return (
@@ -117,7 +145,7 @@ export default class CameraExample extends React.Component {
               textAlign: 'center',
               color: 'white',
               position: 'absolute',
-              left: 20,
+              left: 165,
               bottom: 100,
               fontSize: 18,
               fontFamily: 'Bungee-Regular',
@@ -129,7 +157,7 @@ export default class CameraExample extends React.Component {
               textAlign: 'center',
               color: 'white',
               position: 'absolute',
-              left: 80,
+              left: 300,
               bottom: 100,
               fontSize: 18,
               fontFamily: 'Bungee-Regular',
@@ -146,6 +174,15 @@ export default class CameraExample extends React.Component {
       base64: true,
       exif: false,
     });
+    //                   await CameraRoll.saveToCameraRoll(picture);
+    // let result = await ImagePicker.launchImageLibraryAsync({
+    //   allowsEditing: true,
+    //   aspect: [4, 3],
+    // });
+
+    // console.log(result);
+    // if (!result.cancelled) {
     this.setState({ width, height, image: 'data:image/jpg;base64,' + data });
+    // }
   };
 }
